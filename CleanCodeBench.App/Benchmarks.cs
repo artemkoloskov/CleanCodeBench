@@ -50,11 +50,37 @@ namespace CleanCodeBench.App
         }
 
         [Benchmark]
+        public float CleanCodeShapesAreaAndOtherProps()
+        {
+            float areas = 0.0f;
+
+            foreach (Shape shape in _shapes)
+            {
+                areas += 1.0f / (1.0f + shape.CornerCount()) * shape.Area();
+            }
+
+            return areas;
+        }
+
+        [Benchmark]
         public float CleanCodeShapesArea()
         {
             float areas = 0.0f;
 
             foreach (Shape shape in _shapes)
+            {
+                areas += shape.Area();
+            }
+
+            return areas;
+        }
+
+        [Benchmark]
+        public float CleanCodeOneFileShapesAreaAndOtherProps()
+        {
+            float areas = 0.0f;
+
+            foreach (OneFileShape shape in _oneFileShapes)
             {
                 areas += 1.0f / (1.0f + shape.CornerCount()) * shape.Area();
             }
@@ -69,6 +95,19 @@ namespace CleanCodeBench.App
 
             foreach (OneFileShape shape in _oneFileShapes)
             {
+                areas += shape.Area();
+            }
+
+            return areas;
+        }
+
+        [Benchmark]
+        public float SimpleShapesAreaAndOtherProps()
+        {
+            float areas = 0.0f;
+
+            foreach (SimpleShape shape in _simpleShapes)
+            {
                 areas += 1.0f / (1.0f + shape.CornerCount()) * shape.Area();
             }
 
@@ -82,7 +121,7 @@ namespace CleanCodeBench.App
 
             foreach (SimpleShape shape in _simpleShapes)
             {
-                areas += 1.0f / (1.0f + shape.CornerCount()) * shape.Area();
+                areas += shape.Area();
             }
 
             return areas;
